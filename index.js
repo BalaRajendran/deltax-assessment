@@ -43,6 +43,13 @@ app.use((req, res, next) => {
 // module.exports = {
 //     app
 // };
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/public/"));
+    const path = require("path");
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "public", "index.html"));
+    });
+}
 
 const PORT = process.env.PORT || 8000;
 var listener = http.createServer(app);
