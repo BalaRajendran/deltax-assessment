@@ -29,8 +29,12 @@ class TopNavBar extends React.Component {
       left: false
     };
   }
+  componentDidMount() {
+    var pathArray = window.location.href;
+    pathArray = pathArray.split("/");
+    pathArray = pathArray.reverse();
+  }
   handleButtonClick = (tabIndex, e) => {
-    this.props.switchTab(tabIndex);
     this.setState({ left: false });
   };
   toggleDrawer = (side, open) => event => {
@@ -45,6 +49,32 @@ class TopNavBar extends React.Component {
   };
   render() {
     const { classes } = this.props;
+    let isSelect = {
+      movie: "unset",
+      tvshows: "unset",
+      celebrities: "unset",
+      watchlist: "unset"
+    };
+    var pathArray = window.location.href;
+    pathArray = pathArray.split("/");
+    pathArray = pathArray.reverse();
+    switch (pathArray[0]) {
+      case "movie":
+        isSelect.movie = "#423bbf";
+        break;
+      case "tvshows":
+        isSelect.tvshows = "#423bbf";
+        break;
+      case "celebrities":
+        isSelect.celebrities = "#423bbf";
+        break;
+      case "watchlist":
+        isSelect.watchlist = "#423bbf";
+        break;
+      default:
+        isSelect.movie = "#423bbf";
+        break;
+    }
     return (
       <div>
         <div className={classes.root}>
@@ -66,16 +96,32 @@ class TopNavBar extends React.Component {
               </Typography>
               <Hidden only={["xs"]}>
                 <Grid container alignItems="center">
-                  <Button className={classes.button} color="inherit">
+                  <Button
+                    style={{ backgroundColor: isSelect.movie }}
+                    className={classes.button}
+                    color="inherit"
+                  >
                     Movies
                   </Button>
-                  <Button className={classes.button} color="inherit">
+                  <Button
+                    style={{ backgroundColor: isSelect.tvshows }}
+                    className={classes.button}
+                    color="inherit"
+                  >
                     Tv Shows
                   </Button>
-                  <Button className={classes.button} color="inherit">
+                  <Button
+                    style={{ backgroundColor: isSelect.celebrities }}
+                    className={classes.button}
+                    color="inherit"
+                  >
                     Celebrities
                   </Button>
-                  <Button className={classes.button} color="inherit">
+                  <Button
+                    style={{ backgroundColor: isSelect.watchlist }}
+                    className={classes.button}
+                    color="inherit"
+                  >
                     Watch List
                   </Button>
                 </Grid>

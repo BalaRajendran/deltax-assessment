@@ -45,7 +45,8 @@ export const Styles = theme => ({
         }
     },
     button: {
-        width: "15%"
+        width: "15%",
+        padding: "19px 18px"
     },
     menuButton: {
         marginLeft: -12,
