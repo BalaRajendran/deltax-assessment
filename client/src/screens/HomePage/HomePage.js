@@ -2,16 +2,29 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles, Grid, Hidden } from "@material-ui/core";
 import { Styles } from "./HomePageStyle";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import TopNavBar from "./../../components/NavBars/TopNavBar";
+import Container from "../../components/Container/Container";
+
 class Home extends Component {
   render() {
     const { classes } = this.props;
-    return <div className={classes.root} />;
+    return (
+      <div className={classes.root}>
+        <Grid container className={classes.mainContainer} direction="column">
+          <Grid item xs="1">
+            <TopNavBar />
+          </Grid>
+          <Grid item xs>
+            <Container />
+          </Grid>
+        </Grid>
+      </div>
+    );
   }
 }
+
+Home.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
 export default withStyles(Styles)(Home);
