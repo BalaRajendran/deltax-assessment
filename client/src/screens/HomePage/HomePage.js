@@ -17,7 +17,7 @@ class Home extends Component {
     return (
       <div className={classes.root}>
         <Grid container className={classes.mainContainer} direction="column">
-          <Grid item xs="1">
+          <Grid item xs={1}>
             <TopNavBar selTab={tabIndex} />{" "}
           </Grid>{" "}
           <Grid item xs>

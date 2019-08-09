@@ -1,24 +1,3 @@
-// import React from "react";
-// import { withStyles, Grid } from "@material-ui/core";
-
-// const styles = theme => ({
-//   root: {
-//     flexGrow: 1
-//   },
-// });
-
-// class Tabcontainer extends React.Component {
-//   render() {
-//     const { classes } = this.props;
-//     return (
-//       <Grid container className={classes.root} direction="column">
-
-//       </Grid>
-//     );
-//   }
-// }
-
-// export default withStyles(styles)(Tabcontainer);
 import React from "react";
 import {
   Paper,
@@ -33,47 +12,7 @@ import {
 } from "@material-ui/core";
 import { styles } from "./Containerstyles";
 import { Link } from "react-router-dom";
-
-const suggestions = [
-  { label: "Afghanistan" },
-  { label: "Aland Islands" },
-  { label: "Albania" },
-  { label: "Algeria" },
-  { label: "American Samoa" },
-  { label: "Andorra" },
-  { label: "Angola" },
-  { label: "Anguilla" },
-  { label: "Antarctica" },
-  { label: "Antigua and Barbuda" },
-  { label: "Argentina" },
-  { label: "Armenia" },
-  { label: "Aruba" },
-  { label: "Australia" },
-  { label: "Austria" },
-  { label: "Azerbaijan" },
-  { label: "Bahamas" },
-  { label: "Bahrain" },
-  { label: "Bangladesh" },
-  { label: "Barbados" },
-  { label: "Belarus" },
-  { label: "Belgium" },
-  { label: "Belize" },
-  { label: "Benin" },
-  { label: "Bermuda" },
-  { label: "Bhutan" },
-  { label: "Bolivia, Plurinational State of" },
-  { label: "Bonaire, Sint Eustatius and Saba" },
-  { label: "Bosnia and Herzegovina" },
-  { label: "Botswana" },
-  { label: "Bouvet Island" },
-  { label: "Brazil" },
-  { label: "British Indian Ocean Territory" },
-  { label: "Brunei Darussalam" }
-].map(suggestion => ({
-  value: suggestion.label,
-  label: suggestion.label
-}));
-
+// import SelectComponent from "./Select";
 class LoginTab extends React.Component {
   render() {
     const {
@@ -172,6 +111,7 @@ class LoginTab extends React.Component {
                   />
                 </Grid>
               </Grid>
+              {/* <SelectComponent /> */}
               <Grid
                 container
                 alignItems="center"
