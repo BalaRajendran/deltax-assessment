@@ -30,9 +30,9 @@ class TopNavBar extends React.Component {
     };
   }
   componentDidMount() {
-    var pathArray = window.location.href;
-    pathArray = pathArray.split("/");
-    pathArray = pathArray.reverse();
+    var pathArray2 = window.location.href;
+    var pathArray1 = pathArray2.split("/");
+    pathArray1 = pathArray1.reverse();
   }
   handleButtonClick = (tabIndex, e) => {
     this.setState({ left: false });
@@ -55,10 +55,10 @@ class TopNavBar extends React.Component {
       celebrities: "unset",
       watchlist: "unset"
     };
-    var pathArray = window.location.href;
-    pathArray = pathArray.split("/");
-    pathArray = pathArray.reverse();
-    switch (pathArray[0]) {
+    var pathArray2 = window.location.href;
+    var pathArray1 = pathArray2.split("/");
+    pathArray1 = pathArray1.reverse();
+    switch (pathArray1[0]) {
       case "movie":
         isSelect.movie = "#423bbf";
         break;
