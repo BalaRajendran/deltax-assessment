@@ -14,3 +14,27 @@ p,
 span {
     font-family: "BasisGrotesquePro-Bold" !important;
 }
+
+.dataTables_length {
+    display: none;
+}
+
+body {
+    overflow-x: hidden
+}
+
+.dataTables_wrapper .row {
+    display: block
+}
+
+.dataTables_paginate {
+    margin-left: 78%
+}
+
+.dataTables_wrapper .dataTables_filter {
+    width: 34%
+}
+
+.dataTables_wrapper .dataTables_filter label {
+    width: 100%
+}

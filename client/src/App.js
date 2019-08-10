@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./screens/HomePage/HomePage";
+// import Home from "./components/Container/MovieList";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme(require("./theme.json"));
