@@ -84,7 +84,7 @@ class MovieList extends Component {
       ]
     };
     return (
-      <Grid item style={{ marginTop: "100px" }}>
+      <Grid item style={{ marginTop: "100px", width: "90%", marginLeft: "5%" }}>
         <SelectComponent
           title="Add New Movie"
           name="Add movie"

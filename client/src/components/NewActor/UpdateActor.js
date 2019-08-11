@@ -49,6 +49,21 @@ class NewMovies extends React.Component {
       submitMessage: ""
     };
   }
+  componentWillMount() {
+    const id = this.props.id;
+    axios
+      .get("backend/newactor")
+      .then(response => {
+        this.setState({
+          actorlist: response.data,
+          isLoading: false
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
   handleDateChange = date => {
     this.setState({
       selectedDate: date
@@ -242,7 +257,6 @@ class NewMovies extends React.Component {
                       style={{ width: "100%" }}
                     >
                       <KeyboardDatePicker
-                        error={this.state.doberror}
                         margin="normal"
                         id="mui-pickers-date"
                         label="Date Of Birth"
@@ -289,17 +303,17 @@ class NewMovies extends React.Component {
                   onChange={this.handleBio}
                 />
               </Grid>
-              {this.state.submitMessage && (
-                <Grid
-                  container
-                  justify="center"
-                  style={{ paddingBottom: "10px" }}
-                >
-                  <Typography align="center" variant="subtitle2" color="error">
-                    {this.state.submitMessage}
-                  </Typography>
-                </Grid>
-              )}
+              {/* {submitMessage && (
+              <Grid
+                container
+                justify="center"
+                style={{ paddingBottom: "10px" }}
+              >
+                <Typography align="center" variant="subtitle2" color="error">
+                  {submitMessage}
+                </Typography>
+              </Grid>
+            )} */}
               <Grid container justify="center" style={{ marginTop: "10px" }}>
                 <Button
                   variant="contained"

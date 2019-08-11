@@ -1,4 +1,5 @@
 import React from "react";
+import Select from "react-dropdown-select";
 import {
   Input,
   Paper,
@@ -14,7 +15,7 @@ import Add from "@material-ui/icons/Add";
 import SearchIcon from "@material-ui/icons/Search";
 import Tick from "./images/checked.png";
 import hobbies from "./HobbiesObj";
-import SelectComponent from "./../NewMovieDialog/NewMovieDialog";
+import SelectComponent from "./../CommonDialog/CommonDialog";
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -38,12 +39,27 @@ const styles = theme => ({
     maxHeight: "50%"
   }
 });
+const options = [
+  {
+    id: "fa67bae6-509f-4c2b-a209-241bd9a9f714",
+    name: "Camden Hartmann"
+  },
+  {
+    id: "fe721ca3-f0ea-476d-91a9-c05925679637",
+    name: "Jefferey King"
+  },
+  {
+    id: "56b1ebd3-350e-46ed-a109-73a45895e30f",
+    name: "Alexie Howell"
+  }
+];
 
 class NewMovies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      openDialog: false
+      openDialog: false,
+      values: []
     };
   }
   handleClose1 = () => {
@@ -89,6 +105,7 @@ class NewMovies extends React.Component {
     } else {
       passErr = false;
     }
+
     return (
       <div
         style={{
@@ -97,7 +114,7 @@ class NewMovies extends React.Component {
           overflowX: "hidden"
         }}
       >
-        <SelectComponent
+        {/* <SelectComponent
           title="Add New Actor"
           name="New Actor"
           head="Actor List"
@@ -115,7 +132,7 @@ class NewMovies extends React.Component {
         >
           <Add />
           Add New Actor
-        </Button>
+        </Button> */}
         <div className={classes.padding}>
           <div className={classes.margin}>
             <Grid container spacing={32} alignItems="flex-end">
@@ -215,6 +232,14 @@ class NewMovies extends React.Component {
                 <span class="file-custom" />
               </label>
             </Grid>
+            <Select
+              multi
+              options={options}
+              values={this.state.values}
+              onChange={values => {
+                this.setState({ values });
+              }}
+            />
             <Grid
               container
               direction="row"
@@ -228,10 +253,10 @@ class NewMovies extends React.Component {
                 margin="normal"
                 className={classes.textField}
                 style={{ width: "100%" }}
-                onChange={e => {
-                  this.handleChange(e);
-                  this.updateTextField(e);
-                }}
+                // onChange={e => {
+                //   this.handleChange(e);
+                //   this.updateTextField(e);
+                // }}
               />
             </Grid>
             <Grid
@@ -240,7 +265,7 @@ class NewMovies extends React.Component {
               style={{ marginTop: "15px" }}
               justify="space-between"
             />
-            {submitMessage && (
+            {/* {submitMessage && (
               <Grid
                 container
                 justify="center"
@@ -250,23 +275,22 @@ class NewMovies extends React.Component {
                   {submitMessage}
                 </Typography>
               </Grid>
-            )}
+            )} */}
             <Grid container justify="center" style={{ marginTop: "10px" }}>
               <Button
                 variant="contained"
                 className={classes.button}
                 disabled={isLoading}
                 color="primary"
-                onClick={this.handleSubmit}
+                // onClick={this.handleSubmit}
               >
-                {isLoading ? (
+                {/* {isLoading ? (
                   <CircularProgress
                     size={24}
                     className={classes.buttonProgress}
                   />
-                ) : (
-                  "Login"
-                )}
+                ) : ( */}
+                Login
               </Button>
             </Grid>
           </div>

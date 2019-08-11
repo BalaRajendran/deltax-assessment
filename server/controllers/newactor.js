@@ -16,3 +16,9 @@ exports.actor_create = function(req, res) {
         }
     });
 };
+
+exports.get_actor = function(req, res) {
+    Actor.find(function(err, actorlist) {
+        res.json(actorlist);
+    });
+};
