@@ -4,6 +4,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { Styles } from "./TopNavBarStyles";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
+import Navigation from "./TopNavigation";
 import {
   Avatar,
   ListItemIcon,
@@ -49,32 +50,6 @@ class TopNavBar extends React.Component {
   };
   render() {
     const { classes } = this.props;
-    let isSelect = {
-      movie: "unset",
-      tvshows: "unset",
-      celebrities: "unset",
-      watchlist: "unset"
-    };
-    var pathArray2 = window.location.href;
-    var pathArray1 = pathArray2.split("/");
-    pathArray1 = pathArray1.reverse();
-    switch (pathArray1[0]) {
-      case "movie":
-        isSelect.movie = "#423bbf";
-        break;
-      case "tvshows":
-        isSelect.tvshows = "#423bbf";
-        break;
-      case "celebrities":
-        isSelect.celebrities = "#423bbf";
-        break;
-      case "watchlist":
-        isSelect.watchlist = "#423bbf";
-        break;
-      default:
-        isSelect.movie = "#423bbf";
-        break;
-    }
     return (
       <div>
         <div className={classes.root}>
@@ -94,38 +69,8 @@ class TopNavBar extends React.Component {
               >
                 IMDB
               </Typography>
+              <Navigation />
               <Hidden only={["xs"]}>
-                <Grid container alignItems="center">
-                  <Button
-                    style={{ backgroundColor: isSelect.movie }}
-                    className={classes.button}
-                    color="inherit"
-                  >
-                    Movies
-                  </Button>
-                  <Button
-                    style={{ backgroundColor: isSelect.tvshows }}
-                    className={classes.button}
-                    color="inherit"
-                  >
-                    Tv Shows
-                  </Button>
-                  <Button
-                    style={{ backgroundColor: isSelect.celebrities }}
-                    className={classes.button}
-                    color="inherit"
-                  >
-                    Celebrities
-                  </Button>
-                  <Button
-                    style={{ backgroundColor: isSelect.watchlist }}
-                    className={classes.button}
-                    color="inherit"
-                  >
-                    Watch List
-                  </Button>
-                </Grid>
-
                 <div className={classes.search}>
                   <div className={classes.searchIcon}>
                     <SearchIcon />

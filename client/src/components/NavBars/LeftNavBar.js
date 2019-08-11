@@ -10,31 +10,35 @@ class LeftNavBar extends React.Component {
   render() {
     const { classes, proPic, selTab } = this.props;
     let isSelect = {
-      home: "unset",
-      help: "unset",
-      settings: "unset",
-      testcase: "unset"
+      movie: "unset",
+      tvshows: "unset",
+      celebrities: "unset",
+      watchlist: "unset",
+      actorlist: "unset"
     };
-
-    switch (selTab) {
-      case 1:
-        isSelect.home = "#423bbf";
+    var pathArray2 = window.location.href;
+    var pathArray1 = pathArray2.split("/");
+    pathArray1 = pathArray1.reverse();
+    switch (pathArray1[0]) {
+      case "movie":
+        isSelect.movie = "#423bbf";
         break;
-      case 2:
-        isSelect.testcase = "#423bbf";
+      case "tvshows":
+        isSelect.tvshows = "#423bbf";
         break;
-      case 3:
-        isSelect.help = "#423bbf";
+      case "actorlist":
+        isSelect.actorlist = "#423bbf";
         break;
-      case 4:
-        isSelect.settings = "#423bbf";
+      case "celebrities":
+        isSelect.celebrities = "#423bbf";
         break;
-
+      case "watchlist":
+        isSelect.watchlist = "#423bbf";
+        break;
       default:
-        isSelect.home = "#423bbf";
+        isSelect.movie = "#423bbf";
         break;
     }
-
     return (
       <Grid
         container

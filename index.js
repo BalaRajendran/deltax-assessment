@@ -9,7 +9,6 @@ mongoose.Promise = bluebird;
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true }, function(err, db) {
     if (!err) {
         console.log("Database Connected!");
@@ -17,8 +16,7 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true }, function(err, db) {
         console.log("Database Not Connected!");
     }
 });
-
-// var router = require("./route/index");
+var mainRoutes = require("./server/router/index");
 var app = express();
 app.use(logger("dev"));
 app.use(bodyParser.json());
@@ -37,12 +35,7 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Methods", "*");
     return next();
 });
-
-// app.use("/", router);
-
-// module.exports = {
-//     app
-// };
+app.use("/", mainRoutes);
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/public/"));
     const path = require("path");
@@ -50,7 +43,6 @@ if (process.env.NODE_ENV === "production") {
         res.sendFile(path.resolve(__dirname, "client", "public", "index.html"));
     });
 }
-
 const PORT = process.env.PORT || 8000;
 var listener = http.createServer(app);
 var listener = app.listen(PORT, function() {

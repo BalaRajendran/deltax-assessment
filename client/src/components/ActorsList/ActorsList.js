@@ -16,23 +16,7 @@ import {
   MDBTableHead
 } from "mdbreact";
 import { withStyles, Grid, Hidden } from "@material-ui/core";
-class Testcase extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    };
-  }
-  handleClose = () => {
-    this.setState({
-      open: false
-    });
-  };
-  handleOpen = () => {
-    this.setState({
-      open: true
-    });
-  };
+class ActorList extends Component {
   render() {
     const data = {
       columns: [
@@ -101,7 +85,11 @@ class Testcase extends Component {
     };
     return (
       <Grid item style={{ marginTop: "100px" }}>
-        <SelectComponent />
+        <SelectComponent
+          title="Add New Actor"
+          name="New Actor"
+          head="Actor List"
+        />
         <MDBDataTable
           fixed
           order={["name", "asc"]}
@@ -121,4 +109,4 @@ class Testcase extends Component {
   }
 }
 
-export default Testcase;
+export default ActorList;

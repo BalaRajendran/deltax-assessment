@@ -7,7 +7,6 @@ import {
   DialogActions
 } from "@material-ui/core";
 import { withStyles, Grid } from "@material-ui/core";
-import DialogHead from "./../DialogTitle/DialogTitle";
 import NewActors from "./../NewActor/NewActors";
 import NewMovies from "./../NewMovies/NewMovies";
 const styles = theme => ({
@@ -20,43 +19,22 @@ const styles = theme => ({
 });
 
 class DialogComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    };
-  }
-  handleClose = () => {
-    this.setState({
-      open: false
-    });
-  };
-  handleOpen = () => {
-    this.setState({
-      open: true
-    });
-  };
   render() {
     const { classes } = this.props;
     return (
       <Grid>
-        <DialogHead
-          name={this.props.name}
-          head={this.props.head}
-          handleOpen={this.handleOpen}
-        />
         <Dialog
           disableBackdropClick
           disableEscapeKeyDown
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={this.props.openDialog}
+          onClose={this.props.handleClose1}
         >
           <DialogTitle>{this.props.title}</DialogTitle>
           <DialogContent className={classes.setwidth}>
-            {this.props.head == "Actor List" ? <NewActors /> : <NewMovies />}
+            <NewActors />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.props.handleClose} color="primary">
               Cancel
             </Button>
           </DialogActions>

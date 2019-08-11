@@ -10,10 +10,11 @@ import {
   InputLabel,
   Typography
 } from "@material-ui/core";
+import Add from "@material-ui/icons/Add";
 import SearchIcon from "@material-ui/icons/Search";
 import Tick from "./images/checked.png";
 import hobbies from "./HobbiesObj";
-
+import SelectComponent from "./../NewMovieDialog/NewMovieDialog";
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -42,15 +43,22 @@ class NewMovies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      maxCount: 50,
-      currentCount: 0,
-      selectedHobby: [],
-      HobbiesObj: hobbies.HobbiesObj
+      openDialog: false
     };
-    this.updateTextField = this.updateTextField.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
+  handleClose1 = () => {
+    this.setState({
+      openDialog: false
+    });
+  };
+  handleOpen1 = () => {
+    this.setState({
+      openDialog: true
+    });
+  };
+  // this.updateTextField = this.updateTextField.bind(this);
+  // this.handleClick = this.handleClick.bind(this);
+  // this.handleChange = this.handleChange.bind(this);
   state = {
     spacing: "16",
     overlay: false,
@@ -81,7 +89,6 @@ class NewMovies extends React.Component {
     } else {
       passErr = false;
     }
-
     return (
       <div
         style={{
@@ -90,6 +97,25 @@ class NewMovies extends React.Component {
           overflowX: "hidden"
         }}
       >
+        <SelectComponent
+          title="Add New Actor"
+          name="New Actor"
+          head="Actor List"
+          openDialog={this.state.openDialog}
+          handleClose={this.handleClose1}
+        />
+        <Button
+          variant="contained"
+          style={{
+            left: "80%",
+            backgroundColor: "#00c851",
+            color: "white"
+          }}
+          onClick={this.handleOpen1}
+        >
+          <Add />
+          Add New Actor
+        </Button>
         <div className={classes.padding}>
           <div className={classes.margin}>
             <Grid container spacing={32} alignItems="flex-end">

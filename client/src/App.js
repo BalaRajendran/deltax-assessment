@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./screens/HomePage/HomePage";
-// import Home from "./components/Container/MovieList";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-
+import TopNavBar from "./components/NavBars/TopNavBar";
+import ActorList from "./screens/ActorList/ActorList";
+import { withStyles, Grid, Hidden } from "@material-ui/core";
+import { Styles } from "./AppStyle";
 const theme = createMuiTheme(require("./theme.json"));
 
 class NotFound extends Component {
@@ -18,18 +20,26 @@ class NotFound extends Component {
 
 class App extends Component {
   render() {
+    const { classes } = this.props;
     return (
       <MuiThemeProvider theme={theme}>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/tvshows" component={Home} />
-            <Route exact path="*" component={NotFound} />
-          </Switch>
-        </Router>
+        <div className={classes.root}>
+          <Grid container direction="column">
+            <Grid item container xs={1}>
+              <TopNavBar />{" "}
+            </Grid>{" "}
+            <Grid item xs>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/actorlist" component={ActorList} />
+                <Route exact path="*" component={NotFound} />
+              </Switch>
+            </Grid>{" "}
+          </Grid>{" "}
+        </div>
       </MuiThemeProvider>
     );
   }
 }
-export default App;
+export default withStyles(Styles)(App);

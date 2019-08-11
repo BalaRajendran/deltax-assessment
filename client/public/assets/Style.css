@@ -38,3 +38,19 @@ body {
 .dataTables_wrapper .dataTables_filter label {
     width: 100%
 }
+
+::-webkit-scrollbar {
+    width: 8px
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8c66ff
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff8c66
+}
