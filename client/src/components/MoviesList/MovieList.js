@@ -11,7 +11,7 @@ import Delete from "@material-ui/icons/Delete";
 import LazyLoad from "react-lazy-load";
 import axios from "axios";
 import Edit from "@material-ui/icons/Edit";
-import SelectComponent from "./../Dialog/Dialog";
+import SelectComponent from "./../Dialog/DialogTitle";
 import {
   MDBBtn,
   MDBTable,
@@ -24,6 +24,8 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import green from "@material-ui/core/colors";
+import UpdateDialog from "./../Dialog/Dialog";
+import CommonDialogComponent from "./../Dialog/DialogTitle";
 class MovieList extends Component {
   constructor(props) {
     super(props);
@@ -38,9 +40,6 @@ class MovieList extends Component {
   componentWillMount() {
     this.handleFetch();
   }
-  handleEdit = () => {
-    alert("f");
-  };
   handleFetch() {
     axios
       .get("backend/movielist")
@@ -177,13 +176,24 @@ class MovieList extends Component {
         });
       });
   }
+  handleClose = () => {
+    this.setState({
+      openDialog: false
+    });
+  };
   handleCloseSnack = () => {
     this.setState({
       open: false,
       Message: ""
     });
   };
+  handleEdit = () => {
+    this.setState({
+      openDialog: true
+    });
+  };
   render() {
+    const { openDialog } = this.state;
     return (
       <Grid item style={{ marginTop: "100px", width: "90%", marginLeft: "5%" }}>
         <Snackbar
@@ -208,10 +218,24 @@ class MovieList extends Component {
             </IconButton>
           ]}
         />
-        <SelectComponent
+        {/* <SelectComponent
           title="Add New Movie"
           name="Add movie"
           head="Movie List"
+        /> */}
+        <CommonDialogComponent
+          title="Add New Movie"
+          name="New Movie"
+          head="Movie List"
+          // openDialog={openDialog}
+          // handleClose={this.handleClose}
+        />
+        <UpdateDialog
+          title="Update Movie"
+          name="Update Movie"
+          head="Movie List"
+          open={openDialog}
+          handleClose={this.handleClose}
         />
         {this.state.isLoading && (
           <center>

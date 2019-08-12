@@ -4,7 +4,6 @@ import { Button } from "@material-ui/core";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import SelectComponent from "./../Dialog/Dialog";
-import CommonDialogComponent from "./../Dialog/Dialog";
 import { MDBDataTable } from "mdbreact";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
@@ -12,7 +11,8 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import green from "@material-ui/core/colors";
-import UpdateDialog from "./../Dialog/UpdateDialog";
+import UpdateDialog from "./../Dialog/Dialog";
+import CommonDialogComponent from "./../Dialog/DialogTitle";
 class ActorList extends Component {
   constructor(props) {
     super(props);
@@ -154,6 +154,11 @@ class ActorList extends Component {
     this.setState({
       open: false,
       Message: ""
+    });
+  };
+  handleClose = () => {
+    this.setState({
+      openDialog: false
     });
   };
   handleEdit = id => {

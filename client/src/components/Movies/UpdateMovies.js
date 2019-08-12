@@ -20,7 +20,7 @@ import {
   Typography
 } from "@material-ui/core";
 import Add from "@material-ui/icons/Add";
-import SelectComponent from "../CommonDialog/CommonDialog";
+import SelectComponent from "../Dialog/Dialog";
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -296,7 +296,7 @@ class NewMovies extends React.Component {
           title="Add New Actor"
           name="New Actor"
           head="Actor List"
-          openDialog={this.state.openDialog}
+          open={this.state.openDialog}
           handleClose={this.handleClose1}
         />
         <Button

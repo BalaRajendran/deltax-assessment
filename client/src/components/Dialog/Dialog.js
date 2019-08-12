@@ -10,6 +10,8 @@ import { withStyles, Grid } from "@material-ui/core";
 import DialogHead from "./../Dialog/DialogTitle";
 import NewActors from "./../Actor/NewActors";
 import NewMovies from "./../Movies/NewMovies";
+import UpdateActors from "./../Actor/UpdateActors";
+import UpdateMovies from "./../Movies/UpdateMovies";
 const styles = theme => ({
   setwidth: {
     width: "600px",
@@ -20,52 +22,38 @@ const styles = theme => ({
 });
 
 class DialogComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    };
-  }
-  handleClose = () => {
-    this.setState({
-      open: false
-    });
-    location.reload();
-  };
-  handleOpen = () => {
-    this.setState({
-      open: true
-    });
-  };
   render() {
     const { classes } = this.props;
+    let tab = <NewMovies />;
+    switch (this.props.title) {
+      case "Add New Actor":
+        tab = <NewActors />;
+        break;
+      case "Add New Movie":
+        tab = <NewMovies />;
+        break;
+      case "Update Movie":
+        tab = <UpdateMovies />;
+        break;
+      case "Update Actor":
+        tab = <UpdateActors />;
+        break;
+      default:
+        tab = <UpdateActors />;
+        break;
+    }
     return (
       <Grid>
-        {(this.props.title == "Add New Movie" ||
-          this.props.title == "Add New Actor") && (
-          <DialogHead
-            name={this.props.name}
-            head={this.props.head}
-            handleOpen={this.handleOpen}
-          />
-        )}
         <Dialog
           disableBackdropClick
           disableEscapeKeyDown
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={this.props.open}
+          onClose={this.props.handleClose}
         >
           <DialogTitle>{this.props.title}</DialogTitle>
-          <DialogContent className={classes.setwidth}>
-            <NewMovies />
-            {/* {this.props.head == "Actor List" ? (
-              <NewActors />
-            ) : (
-              <NewMovies />
-            )} */}
-          </DialogContent>
+          <DialogContent className={classes.setwidth}>{tab}</DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.props.handleClose} color="primary">
               Cancel
             </Button>
           </DialogActions>
