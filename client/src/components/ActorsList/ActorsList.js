@@ -12,6 +12,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import green from "@material-ui/core/colors";
+import UpdateDialog from "./../Dialog/UpdateDialog";
 class ActorList extends Component {
   constructor(props) {
     super(props);
@@ -124,9 +125,7 @@ class ActorList extends Component {
         console.log(error);
       });
   }
-  handleEdit = id => {
-    console.log(id);
-  };
+
   handleDelete(id) {
     this.setState({
       deleteLoader: true
@@ -157,6 +156,12 @@ class ActorList extends Component {
       Message: ""
     });
   };
+  handleEdit = id => {
+    console.log(id);
+    this.setState({
+      openDialog: true
+    });
+  };
   render() {
     const { openDialog } = this.state;
     return (
@@ -185,16 +190,18 @@ class ActorList extends Component {
             ]}
           />
         )}
-        {/* <SelectComponent
-          title="Add New Actor"
-          name="New Actor"
-          head="Actor List"
-        /> */}
         <CommonDialogComponent
           title="Add New Actor"
           name="New Actor"
           head="Actor List"
-          openDialog={this.state.openDialog}
+          openDialog={openDialog}
+          handleClose={this.handleClose}
+        />
+        <UpdateDialog
+          title="Update Actor"
+          name="Update Actor"
+          head="Actor List"
+          open={openDialog}
           handleClose={this.handleClose}
         />
         {this.state.isLoading && (
