@@ -391,26 +391,6 @@ class NewMovies extends React.Component {
                 />
               </Grid>
             </Grid>
-            {/* <Grid container spacing={32} alignItems="flex-end">
-              <Grid item md={true} sm={true} xs={true}>
-                <TextField
-                  id="cost"
-                  label="Cost"
-                  value={this.state.cost}
-                  error={this.state.costError ? true : false}
-                  helperText={this.state.costError}
-                  onChange={this.handlecost}
-                  type="text"
-                  fullWidth
-                  required
-                  id="standard-textarea"
-                  label="Cost"
-                  placeholder="Somthing about the Movie"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
-            </Grid> */}
             <Grid
               container
               direction="row"

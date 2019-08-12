@@ -22,3 +22,13 @@ exports.get_actor = function(req, res) {
         res.json(actorlist);
     });
 };
+
+exports.delete_actor = function(req, res) {
+    Actor.deleteOne({ _id: req.body.id }, function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("done");
+        }
+    });
+};

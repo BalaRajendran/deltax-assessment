@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Button } from "@material-ui/core";
 import Edit from "@material-ui/icons/Edit";
+import Delete from "@material-ui/icons/Delete";
 import SelectComponent from "./../Dialog/Dialog";
 import CommonDialogComponent from "./../CommonDialog/CommonDialog";
 import { MDBDataTable } from "mdbreact";
@@ -10,7 +11,11 @@ import { Grid } from "@material-ui/core";
 class ActorList extends Component {
   constructor(props) {
     super(props);
-    this.state = { actorlist: [], isLoading: true, openDialog: false };
+    this.state = {
+      actorlist: [],
+      isLoading: true,
+      openDialog: false
+    };
   }
   componentWillMount() {
     axios
@@ -25,27 +30,42 @@ class ActorList extends Component {
             sex: response.data[i].sex,
             bio: response.data[i].bio,
             edit: (
-              <Button
-                variant="contained"
-                style={{
-                  backgroundColor: "#00c851",
-                  color: "white"
-                }}
-                id={response.data[i]._id}
-                onClick={this.handleEdit}
-              >
-                <Edit />
-              </Button>
+              <div style={{ display: "flex" }}>
+                <Button
+                  variant="contained"
+                  style={{
+                    backgroundColor: "#00c851",
+                    color: "white"
+                  }}
+                  id={response.data[i]._id}
+                  onClick={this.handleEdit}
+                >
+                  <Edit />
+                </Button>
+                <Button
+                  variant="contained"
+                  className="delete"
+                  style={{
+                    backgroundColor: "#c9302c",
+                    borderColor: "#ac2925",
+                    color: "white"
+                  }}
+                  id={response.data[i]._id}
+                  onClick={this.handleDelete.bind(this, response.data[i]._id)}
+                >
+                  <Delete />
+                </Button>
+              </div>
             )
           };
           r.push(l);
         }
-        var employees = {
-          accounting: []
+        var actorsList = {
+          actors: []
         };
         for (var i in r) {
           var item = r[i];
-          employees.accounting.push({
+          actorsList.actors.push({
             name: item.name,
             dob: item.dob,
             sex: item.sex,
@@ -86,7 +106,7 @@ class ActorList extends Component {
               width: 5
             }
           ],
-          rows: employees["accounting"]
+          rows: actorsList["actors"]
         };
         this.setState({
           actorlist: data,
@@ -101,6 +121,21 @@ class ActorList extends Component {
   handleEdit = () => {
     console.log("Balaji");
   };
+  handleDelete(id) {
+    this.setState({
+      deleteLoader: true
+    });
+    const data = {
+      id
+    };
+    var self = this;
+    axios
+      .post("/backend/deleteactor", data)
+      .then(function(res) {})
+      .catch(function(error) {
+        alert("Try Again Later");
+      });
+  }
   render() {
     const { openDialog } = this.state;
     return (
