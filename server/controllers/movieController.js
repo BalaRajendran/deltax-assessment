@@ -25,3 +25,9 @@ exports.movie_create = function(req, res) {
         }
     });
 };
+
+exports.get_movie = function(req, res) {
+    Movie.find(function(err, movielist) {
+        res.json(movielist);
+    });
+};

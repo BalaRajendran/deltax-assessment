@@ -39,6 +39,15 @@ body {
     width: 100%
 }
 
+@media (max-width: 576px) {
+    .dataTables_wrapper .dataTables_filter {
+        width: unset
+    }
+    .dataTables_paginate {
+        margin-left: unset
+    }
+}
+
 ::-webkit-scrollbar {
     width: 8px
 }

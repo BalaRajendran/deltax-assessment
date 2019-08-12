@@ -16,8 +16,80 @@ class ActorList extends Component {
     axios
       .get("backend/newactor")
       .then(response => {
+        let l;
+        let r = [];
+        for (var i = 0; i < response.data.length; i++) {
+          l = {
+            name: response.data[i].name,
+            dob: response.data[i].dob.substring(0, 10),
+            sex: response.data[i].sex,
+            bio: response.data[i].bio,
+            edit: (
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: "#00c851",
+                  color: "white"
+                }}
+                id={response.data[i]._id}
+                onClick={this.handleEdit}
+              >
+                <Edit />
+              </Button>
+            )
+          };
+          r.push(l);
+        }
+        var employees = {
+          accounting: []
+        };
+        for (var i in r) {
+          var item = r[i];
+          employees.accounting.push({
+            name: item.name,
+            dob: item.dob,
+            sex: item.sex,
+            bio: item.bio,
+            edit: item.edit
+          });
+        }
+        const data = {
+          columns: [
+            {
+              label: "Actor Name",
+              field: "name",
+              sort: "asc",
+              width: 150
+            },
+            {
+              label: "Sex",
+              field: "sex",
+              sort: "asc",
+              width: 270
+            },
+            {
+              label: "Date Of Birth",
+              field: "dob",
+              sort: "asc",
+              width: 200
+            },
+            {
+              label: "Bio",
+              field: "bio",
+              sort: "asc",
+              width: 100
+            },
+            {
+              label: "Edit",
+              field: "edit",
+              sort: "asc",
+              width: 5
+            }
+          ],
+          rows: employees["accounting"]
+        };
         this.setState({
-          actorlist: response.data,
+          actorlist: data,
           isLoading: false
         });
       })
@@ -25,108 +97,12 @@ class ActorList extends Component {
         console.log(error);
       });
   }
-  // handleCall = () => {
-  //   axios
-  //     .get("backend/newactor")
-  //     .then(response => {
-  //       this.setState({
-  //         actorlist: response.data
-  //       });
-  //     })
-  //     .catch(function(error) {
-  //       console.log(error);
-  //     });
-  // };
-  // handleClose = () => {
-  //   this.setState({
-  //     openDialog: false
-  //   });
-  // };
-  // handleOpen = () => {
-  //   alert("f");
-  //   this.setState({
-  //     openDialog: true
-  //   });
-  // };
+
+  handleEdit = () => {
+    console.log("Balaji");
+  };
   render() {
     const { openDialog } = this.state;
-    function data(actorlist) {
-      const data = {
-        columns: [
-          {
-            label: "Actor Name",
-            field: "name",
-            sort: "asc",
-            width: 150
-          },
-          {
-            label: "Sex",
-            field: "sex",
-            sort: "asc",
-            width: 270
-          },
-          {
-            label: "Date Of Birth",
-            field: "dob",
-            sort: "asc",
-            width: 200
-          },
-          {
-            label: "Bio",
-            field: "bio",
-            sort: "asc",
-            width: 100
-          }
-          // {
-          //   label: "Edit",
-          //   field: "edit",
-          //   sort: "asc",
-          //   width: 5
-          // }
-        ],
-        rows: tabRow(actorlist)
-      };
-      return data;
-    }
-    function tabRow(actorlist) {
-      let l;
-      let r = [];
-      for (var i = 0; i < actorlist.length; i++) {
-        l = {
-          name: actorlist[i].name,
-          dob: actorlist[i].dob.substring(0, 10),
-          sex: actorlist[i].sex,
-          bio: actorlist[i].bio
-          // edit: (
-          //   <Button
-          //     variant="contained"
-          //     style={{
-          //       backgroundColor: "#00c851",
-          //       color: "white"
-          //     }}
-          //     id={actorlist[i]._id}
-          //   >
-          //     <Edit />
-          //   </Button>
-          // )
-        };
-        r.push(l);
-      }
-      console.log(r);
-      var employees = {
-        accounting: []
-      };
-      for (var i in r) {
-        var item = r[i];
-        employees.accounting.push({
-          name: item.name,
-          dob: item.dob,
-          sex: item.sex,
-          bio: item.bio
-        });
-      }
-      return employees["accounting"];
-    }
     return (
       <Grid item style={{ marginTop: "100px", width: "90%", marginLeft: "5%" }}>
         <SelectComponent
@@ -147,7 +123,6 @@ class ActorList extends Component {
           </center>
         )}
         <MDBDataTable
-          fixed
           order={["name", "asc"]}
           btn
           responsive
@@ -158,7 +133,7 @@ class ActorList extends Component {
           striped
           bordered
           hover
-          data={data(this.state.actorlist)}
+          data={this.state.actorlist}
         />
       </Grid>
     );
