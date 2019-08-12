@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Styles } from "./HomePageStyle";
+import { Styles } from "./MoviePageStyle";
 import TopNavBar from "./../../components/NavBars/TopNavBar";
 import MovieList from "./../../components/MoviesList/MovieList";
 

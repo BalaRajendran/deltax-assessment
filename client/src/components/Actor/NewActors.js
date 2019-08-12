@@ -20,7 +20,6 @@ import { green } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
-import Styles from "./NewActorsStyles";
 
 const GreenRadio = withStyles({
   root: {
@@ -31,7 +30,29 @@ const GreenRadio = withStyles({
   },
   checked: {}
 })(props => <Radio color="default" {...props} />);
-
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    height: "95px",
+    width: "95px",
+    justify: "center"
+  },
+  control: {
+    padding: theme.spacing.unit
+  },
+  image: {
+    width: 128,
+    height: 128
+  },
+  img: {
+    margin: "auto",
+    display: "block",
+    maxWidth: "50%",
+    maxHeight: "50%"
+  }
+});
 class NewMovies extends React.Component {
   constructor(props) {
     super(props);
@@ -49,11 +70,6 @@ class NewMovies extends React.Component {
       submitMessage: ""
     };
   }
-  // handleDateChange = date => {
-  //   this.setState({
-  //     selectedDate: date
-  //   });
-  // };
   handleChange = event => {
     this.setState({
       selectedValue: event.target.value
@@ -328,4 +344,4 @@ class NewMovies extends React.Component {
   }
 }
 
-export default withStyles(Styles)(NewMovies);
+export default withStyles(styles)(NewMovies);

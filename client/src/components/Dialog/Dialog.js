@@ -7,9 +7,9 @@ import {
   DialogActions
 } from "@material-ui/core";
 import { withStyles, Grid } from "@material-ui/core";
-import DialogHead from "./../DialogTitle/DialogTitle";
-import NewActors from "./../NewActor/NewActors";
-import NewMovies from "./../NewMovies/NewMovies";
+import DialogHead from "./../Dialog/DialogTitle";
+import NewActors from "./../Actor/NewActors";
+import NewMovies from "./../Movies/NewMovies";
 const styles = theme => ({
   setwidth: {
     width: "600px",

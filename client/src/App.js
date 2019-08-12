@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./screens/HomePage/HomePage";
+import Home from "./screens/MoviePage/MoviePage";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import TopNavBar from "./components/NavBars/TopNavBar";
-import ActorList from "./screens/ActorList/ActorList";
+import ActorList from "./screens/Actor/Actor";
 import { withStyles, Grid, Hidden } from "@material-ui/core";
 import { Styles } from "./AppStyle";
 const theme = createMuiTheme(require("./theme.json"));
