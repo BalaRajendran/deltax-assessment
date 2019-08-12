@@ -4,7 +4,7 @@ import { Button } from "@material-ui/core";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import SelectComponent from "./../Dialog/Dialog";
-import CommonDialogComponent from "./../CommonDialog/CommonDialog";
+import CommonDialogComponent from "./../Dialog/Dialog";
 import { MDBDataTable } from "mdbreact";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
@@ -46,8 +46,7 @@ class ActorList extends Component {
                     backgroundColor: "#00c851",
                     color: "white"
                   }}
-                  id={response.data[i]._id}
-                  onClick={this.handleEdit}
+                  onClick={this.handleEdit.bind(this, response.data[i]._id)}
                 >
                   <Edit />
                 </Button>
@@ -59,7 +58,6 @@ class ActorList extends Component {
                     borderColor: "#ac2925",
                     color: "white"
                   }}
-                  id={response.data[i]._id}
                   onClick={this.handleDelete.bind(this, response.data[i]._id)}
                 >
                   <Delete />
@@ -126,8 +124,8 @@ class ActorList extends Component {
         console.log(error);
       });
   }
-  handleEdit = () => {
-    console.log("Balaji");
+  handleEdit = id => {
+    console.log(id);
   };
   handleDelete(id) {
     this.setState({
@@ -187,11 +185,11 @@ class ActorList extends Component {
             ]}
           />
         )}
-        <SelectComponent
+        {/* <SelectComponent
           title="Add New Actor"
           name="New Actor"
           head="Actor List"
-        />
+        /> */}
         <CommonDialogComponent
           title="Add New Actor"
           name="New Actor"

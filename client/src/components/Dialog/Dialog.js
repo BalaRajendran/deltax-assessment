@@ -41,11 +41,14 @@ class DialogComponent extends React.Component {
     const { classes } = this.props;
     return (
       <Grid>
-        <DialogHead
-          name={this.props.name}
-          head={this.props.head}
-          handleOpen={this.handleOpen}
-        />
+        {(this.props.title == "Add New Movie" ||
+          this.props.title == "Add New Actor") && (
+          <DialogHead
+            name={this.props.name}
+            head={this.props.head}
+            handleOpen={this.handleOpen}
+          />
+        )}
         <Dialog
           disableBackdropClick
           disableEscapeKeyDown

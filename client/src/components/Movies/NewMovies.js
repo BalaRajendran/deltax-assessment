@@ -20,7 +20,7 @@ import {
   Typography
 } from "@material-ui/core";
 import Add from "@material-ui/icons/Add";
-import SelectComponent from "../CommonDialog/CommonDialog";
+import SelectComponent from "../Dialog/Dialog";
 const styles = theme => ({
   root: {
     flexGrow: 1
