@@ -7,6 +7,7 @@ import {
   DialogActions,
   CircularProgress
 } from "@material-ui/core";
+import Delete from "@material-ui/icons/Delete";
 import LazyLoad from "react-lazy-load";
 import axios from "axios";
 import Edit from "@material-ui/icons/Edit";
@@ -19,12 +20,28 @@ import {
   MDBTableHead
 } from "mdbreact";
 import { withStyles, Grid, Hidden } from "@material-ui/core";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import green from "@material-ui/core/colors";
 class MovieList extends Component {
   constructor(props) {
     super(props);
-    this.state = { actorlist: [], isLoading: true, openDialog: false };
+    this.state = {
+      actorlist: [],
+      isLoading: true,
+      openDialog: false,
+      open: false,
+      Message: ""
+    };
   }
   componentWillMount() {
+    this.handleFetch();
+  }
+  handleEdit = () => {
+    alert("f");
+  };
+  handleFetch() {
     axios
       .get("backend/movielist")
       .then(response => {
@@ -49,17 +66,32 @@ class MovieList extends Component {
               </LazyLoad>
             ),
             edit: (
-              <Button
-                variant="contained"
-                style={{
-                  backgroundColor: "#00c851",
-                  color: "white"
-                }}
-                id={response.data[i]._id}
-                onClick={this.handleEdit}
-              >
-                <Edit />
-              </Button>
+              <div style={{ display: "flex" }}>
+                <Button
+                  variant="contained"
+                  style={{
+                    backgroundColor: "#00c851",
+                    color: "white"
+                  }}
+                  id={response.data[i]._id}
+                  onClick={this.handleEdit}
+                >
+                  <Edit />
+                </Button>
+                <Button
+                  variant="contained"
+                  className="delete"
+                  style={{
+                    backgroundColor: "#c9302c",
+                    borderColor: "#ac2925",
+                    color: "white"
+                  }}
+                  id={response.data[i]._id}
+                  onClick={this.handleDelete.bind(this, response.data[i]._id)}
+                >
+                  <Delete />
+                </Button>
+              </div>
             )
           };
           r.push(l);
@@ -121,12 +153,61 @@ class MovieList extends Component {
         console.log(error);
       });
   }
-  handleEdit = () => {
-    alert("f");
+  handleDelete(id) {
+    this.setState({
+      deleteLoader: true
+    });
+    const data = {
+      id
+    };
+    var self = this;
+    axios
+      .post("/backend/deletemovie", data)
+      .then(function(res) {
+        self.handleFetch();
+        self.setState({
+          open: true,
+          Message: "Delete Successfully"
+        });
+      })
+      .catch(function(error) {
+        self.setState({
+          open: true,
+          Message: "Try Again Later"
+        });
+      });
+  }
+  handleCloseSnack = () => {
+    this.setState({
+      open: false,
+      Message: ""
+    });
   };
   render() {
     return (
       <Grid item style={{ marginTop: "100px", width: "90%", marginLeft: "5%" }}>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left"
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          ContentProps={{
+            "aria-describedby": "message-id"
+          }}
+          message={<span id="message-id">{this.state.Message}</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              onClick={this.handleCloseSnack}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
         <SelectComponent
           title="Add New Movie"
           name="Add movie"

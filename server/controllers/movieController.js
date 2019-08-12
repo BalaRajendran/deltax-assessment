@@ -31,3 +31,13 @@ exports.get_movie = function(req, res) {
         res.json(movielist);
     });
 };
+
+exports.delete_movie = function(req, res) {
+    Movie.deleteOne({ _id: req.body.id }, function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("done");
+        }
+    });
+};

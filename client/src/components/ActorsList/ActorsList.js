@@ -8,16 +8,25 @@ import CommonDialogComponent from "./../CommonDialog/CommonDialog";
 import { MDBDataTable } from "mdbreact";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import green from "@material-ui/core/colors";
 class ActorList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       actorlist: [],
       isLoading: true,
-      openDialog: false
+      openDialog: false,
+      open: false,
+      Message: ""
     };
   }
   componentWillMount() {
+    this.handleFetch();
+  }
+  handleFetch() {
     axios
       .get("backend/newactor")
       .then(response => {
@@ -117,7 +126,6 @@ class ActorList extends Component {
         console.log(error);
       });
   }
-
   handleEdit = () => {
     console.log("Balaji");
   };
@@ -131,15 +139,54 @@ class ActorList extends Component {
     var self = this;
     axios
       .post("/backend/deleteactor", data)
-      .then(function(res) {})
+      .then(function(res) {
+        self.handleFetch();
+        self.setState({
+          open: true,
+          Message: "Delete Successfully"
+        });
+      })
       .catch(function(error) {
-        alert("Try Again Later");
+        self.setState({
+          open: true,
+          Message: "Try Again Later"
+        });
       });
   }
+  handleCloseSnack = () => {
+    this.setState({
+      open: false,
+      Message: ""
+    });
+  };
   render() {
     const { openDialog } = this.state;
     return (
       <Grid item style={{ marginTop: "100px", width: "90%", marginLeft: "5%" }}>
+        {this.state.Message && (
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left"
+            }}
+            open={this.state.open}
+            autoHideDuration={6000}
+            ContentProps={{
+              "aria-describedby": "message-id"
+            }}
+            message={<span id="message-id">{this.state.Message}</span>}
+            action={[
+              <IconButton
+                key="close"
+                aria-label="close"
+                color="inherit"
+                onClick={this.handleCloseSnack}
+              >
+                <CloseIcon />
+              </IconButton>
+            ]}
+          />
+        )}
         <SelectComponent
           title="Add New Actor"
           name="New Actor"
