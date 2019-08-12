@@ -1,7 +1,29 @@
 import React from "react";
-import { Grid, withStyles, Avatar, IconButton } from "@material-ui/core";
 import { Styles } from "./LeftNavBarStyles";
-
+import PropTypes from "prop-types";
+import MenuIcon from "@material-ui/icons/Menu";
+// import { Styles } from "./TopNavBarStyles";
+import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
+import Navigation from "./TopNavigation";
+import LeftNav from "./LeftNavBar";
+import {
+  Avatar,
+  ListItemIcon,
+  ListItemText,
+  withStyles,
+  SwipeableDrawer,
+  IconButton,
+  Grid,
+  Button,
+  Typography,
+  List,
+  ListItem,
+  Hidden,
+  Toolbar,
+  AppBar,
+  Divider
+} from "@material-ui/core";
 class LeftNavBar extends React.Component {
   handleButtonClick = (tabIndex, e) => {
     this.props.switchTab(tabIndex);
@@ -40,79 +62,83 @@ class LeftNavBar extends React.Component {
         break;
     }
     return (
-      <Grid
-        container
-        className={classes.container}
-        direction="column"
-        style={{ padding: "0px" }}
-        justify="space-between"
-        alignItems="center"
-      >
-        <Grid item style={{ marginTop: 30 }}>
-          <IconButton style={{ padding: "0px" }}>
-            <Avatar
-              alt="Profile"
-              title="Profile"
-              src={proPic}
-              className={classes.bigAvatar}
-            />
-          </IconButton>
-          <Grid container direction="column" style={{ marginTop: 80 }}>
-            <Grid
-              item
-              container
-              direction="column"
-              spacing={16}
-              alignContent="center"
-              justify="center"
+      <div className={classes.list}>
+        <List>
+          <ListItem className={classes.listtext} button>
+            <ListItemIcon />
+            <ListItemText primary={"Admin"} />
+          </ListItem>
+          <Divider />
+
+          <div className={classes.listspace}>
+            <ListItem
+              className={classes.listtext}
+              button
+              onClick={this.handleButtonClick.bind(this, 1)}
             >
-              <Grid item style={{ backgroundColor: isSelect.home }}>
-                <IconButton onClick={this.handleButtonClick.bind(this, 1)}>
-                  <img
-                    className={classes.iconcolor}
-                    alt="UserStories"
-                    title="UserStories"
-                    src={"/assets/images/userstories.png"}
-                  />
-                </IconButton>
-              </Grid>
-              <Grid item style={{ backgroundColor: isSelect.testcase }}>
-                <IconButton onClick={this.handleButtonClick.bind(this, 2)}>
-                  <img
-                    className={classes.iconcolor}
-                    alt="Testcase"
-                    title="Testcase"
-                    src={"/assets/images/testcase.png"}
-                  />
-                </IconButton>
-              </Grid>
-              <Grid item style={{ backgroundColor: isSelect.help }}>
-                <IconButton onClick={this.handleButtonClick.bind(this, 3)}>
-                  <img
-                    className={classes.iconcolor}
-                    alt="Help"
-                    title="Help"
-                    src={"/assets/images/help.png"}
-                  />
-                </IconButton>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item style={{ backgroundColor: isSelect.settings }}>
-          <IconButton
-            className={classes.iconcolor}
-            onClick={this.handleButtonClick.bind(this, 4)}
-          >
-            <img
-              className={classes.iconcolor}
-              alt="Settings"
-              title="Settings"
-              src={"/assets/images/settings.png"}
-            />
-          </IconButton>
-        </Grid>
-      </Grid>
+              <img
+                className={classes.iconcolor}
+                alt="Help"
+                src={"/assets/images/help.png"}
+              />
+              <ListItemText primary="Home" />
+            </ListItem>
+            <Divider className={classes.divider} />
+            <ListItem
+              className={classes.listtext}
+              button
+              onClick={this.handleButtonClick.bind(this, 5)}
+            >
+              <img
+                className={classes.iconcolor}
+                alt="Help"
+                src={"/assets/images/help.png"}
+              />
+              <ListItemText primary="About" />
+            </ListItem>
+            <Divider className={classes.divider} />
+            <ListItem
+              className={classes.listtext}
+              button
+              onClick={this.handleButtonClick.bind(this, 7)}
+            >
+              <img
+                className={classes.iconcolor}
+                alt="Help"
+                src={"/assets/images/help.png"}
+              />
+              <ListItemText primary="Treatment" />
+            </ListItem>
+            <Divider className={classes.divider} />
+            <ListItem
+              className={classes.listtext}
+              button
+              onClick={this.handleButtonClick.bind(this, 6)}
+            >
+              <img
+                className={classes.iconcolor}
+                alt="Help"
+                src={"/assets/images/help.png"}
+              />
+              <ListItemText primary="Faq" />
+            </ListItem>
+            <Divider className={classes.divider} />
+            <ListItem
+              className={classes.listtext}
+              button
+              onClick={this.handleButtonClick.bind(this, 3)}
+            >
+              <img
+                className={classes.iconcolor}
+                alt="Help"
+                src={"/assets/images/help.png"}
+              />
+              <ListItemText primary="Contact" />
+            </ListItem>
+            <Divider className={classes.divider} />
+          </div>
+        </List>
+      </div>
     );
   }
 }

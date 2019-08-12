@@ -5,6 +5,7 @@ import { Styles } from "./TopNavBarStyles";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Navigation from "./TopNavigation";
+import LeftNav from "./LeftNavBar";
 import {
   Avatar,
   ListItemIcon,
@@ -69,8 +70,10 @@ class TopNavBar extends React.Component {
               >
                 IMDB
               </Typography>
-              <Navigation />
-              <Hidden only={["xs"]}>
+              <Hidden only={["xs", "sm"]}>
+                <Navigation />
+              </Hidden>
+              <Hidden only={["xs", "sm"]}>
                 <div className={classes.search}>
                   <div className={classes.searchIcon}>
                     <SearchIcon />
@@ -87,22 +90,17 @@ class TopNavBar extends React.Component {
               </Hidden>
             </Toolbar>
           </AppBar>
-          <Hidden only={["sm", "lg", "md", "xl"]}>
+          <Hidden only={["lg", "md", "xl"]}>
             <SwipeableDrawer
               open={this.state.left}
               onClose={this.toggleDrawer("left", false)}
               onOpen={this.toggleDrawer("left", true)}
             >
-              <div className={classes.list}>
+              <LeftNav />
+              {/* <div className={classes.list}>
                 <List>
                   <ListItem className={classes.listtext} button>
-                    <ListItemIcon>
-                      <Avatar
-                        alt="admin"
-                        src={this.props.proPic}
-                        className={classes.avatar}
-                      />
-                    </ListItemIcon>
+                    <ListItemIcon />
                     <ListItemText primary={"Admin"} />
                   </ListItem>
                   <Divider />
@@ -175,7 +173,7 @@ class TopNavBar extends React.Component {
                     <Divider className={classes.divider} />
                   </div>
                 </List>
-              </div>
+              </div> */}
             </SwipeableDrawer>
           </Hidden>
         </div>
