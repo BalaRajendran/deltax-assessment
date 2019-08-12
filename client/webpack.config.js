@@ -1,4 +1,5 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 module.exports = env => {
     const isProduction = env === "production";
     return {
@@ -32,6 +33,7 @@ module.exports = env => {
                 }
             ]
         },
+        plugins: [new Dotenv()],
         devtool: isProduction ? "source-map" : "cheap-module-eval-source-map",
         devServer: {
             contentBase: path.join(__dirname, "public"),

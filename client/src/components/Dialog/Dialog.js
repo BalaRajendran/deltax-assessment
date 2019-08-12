@@ -23,13 +23,14 @@ class DialogComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true
+      open: false
     };
   }
   handleClose = () => {
     this.setState({
       open: false
     });
+    location.reload();
   };
   handleOpen = () => {
     this.setState({

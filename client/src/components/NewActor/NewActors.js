@@ -49,11 +49,11 @@ class NewMovies extends React.Component {
       submitMessage: ""
     };
   }
-  handleDateChange = date => {
-    this.setState({
-      selectedDate: date
-    });
-  };
+  // handleDateChange = date => {
+  //   this.setState({
+  //     selectedDate: date
+  //   });
+  // };
   handleChange = event => {
     this.setState({
       selectedValue: event.target.value
@@ -74,16 +74,15 @@ class NewMovies extends React.Component {
       selectedValue: e.target.value
     });
   };
-  handleDob = e => {
-    if (e.target.value == new Date()) {
-      alert("d");
+  handleDateChange = date => {
+    if (date == new Date()) {
       this.setState({
-        selectedDate: e.target.value,
+        selectedDate: date,
         doberror: "Enter Correct Date Of Birth"
       });
     } else {
       this.setState({
-        selectedDate: e.target.value,
+        selectedDate: date,
         doberror: ""
       });
     }
@@ -103,25 +102,23 @@ class NewMovies extends React.Component {
     let k = 1;
     this.setState({ isLoading: true });
     if (!this.state.name) {
-      this.setState({ isLoading: false, nameerror: "Enter Name" });
+      this.setState({ nameerror: "Enter Name" });
       k = 0;
     } else if (!/^[a-zA-Z. ]{2,30}$/.test(this.state.name)) {
       this.setState({
-        isLoading: false,
         nameerror: "Invalid Actor Name"
       });
       k = 0;
     }
     if (this.state.selectedDate.getDate() === new Date().getDate()) {
-      this.setState({ isLoading: false, doberror: "Invalid Date" });
+      this.setState({ doberror: "Invalid Date" });
       k = 0;
     }
     if (!this.state.bio) {
-      this.setState({ isLoading: false, bioerror: "Enter Name" });
+      this.setState({ bioerror: "Enter Name" });
       k = 0;
-    } else if (!/^[a-zA-Z. ]{3,60}$/.test(this.state.bio)) {
+    } else if (!/^[a-zA-Z,-=>. ]{3,500}$/.test(this.state.bio)) {
       this.setState({
-        isLoading: false,
         bioerror: "Invalid Actor Bio"
       });
       k = 0;
@@ -168,8 +165,13 @@ class NewMovies extends React.Component {
           }
         })
         .catch(function(error) {
-          console.log("Try Again Later");
+          this.setState({
+            isLoading: false,
+            submitMessage: "Something Went Wrong"
+          });
         });
+    } else {
+      this.setState({ isLoading: false });
     }
   };
   render() {
