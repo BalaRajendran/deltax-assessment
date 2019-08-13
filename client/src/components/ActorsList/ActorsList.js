@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { Button } from "@material-ui/core";
+import Add from "@material-ui/icons/Add";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import SelectComponent from "./../Dialog/Dialog";
 import { MDBDataTable } from "mdbreact";
 import axios from "axios";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography, Button } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
@@ -20,8 +20,14 @@ class ActorList extends Component {
       actorlist: [],
       isLoading: true,
       openDialog: false,
+      addDialog: false,
       open: false,
-      Message: ""
+      Message: "",
+      id: "",
+      name: "",
+      dob: "",
+      sex: "",
+      bio: ""
     };
   }
   componentWillMount() {
@@ -47,7 +53,14 @@ class ActorList extends Component {
                     backgroundColor: "#00c851",
                     color: "white"
                   }}
-                  onClick={this.handleEdit.bind(this, response.data[i]._id)}
+                  onClick={this.handleEdit.bind(
+                    this,
+                    response.data[i]._id,
+                    response.data[i].name,
+                    response.data[i].dob,
+                    response.data[i].sex,
+                    response.data[i].bio
+                  )}
                 >
                   <Edit />
                 </Button>
@@ -160,12 +173,28 @@ class ActorList extends Component {
     this.setState({
       openDialog: false
     });
+    this.handleFetch();
   };
-  handleEdit = id => {
-    console.log(id);
+  handleEdit = (id, name, dob, sex, bio) => {
     this.setState({
-      openDialog: true
+      openDialog: true,
+      id,
+      name,
+      dob,
+      sex,
+      bio
     });
+  };
+  handleOpen = () => {
+    this.setState({
+      addDialog: true
+    });
+  };
+  handleAddClose = () => {
+    this.setState({
+      addDialog: false
+    });
+    this.handleFetch();
   };
   render() {
     const { openDialog } = this.state;
@@ -195,17 +224,41 @@ class ActorList extends Component {
             ]}
           />
         )}
-        <CommonDialogComponent
+        <div>
+          <Typography
+            variant="h6"
+            style={{ display: "inline", marginLeft: "20px" }}
+          >
+            {this.state.head}
+          </Typography>
+          <Button
+            variant="contained"
+            style={{
+              left: "80%",
+              backgroundColor: "#00c851",
+              color: "white"
+            }}
+            onClick={this.handleOpen}
+          >
+            <Add /> Add New Actor
+          </Button>
+        </div>
+        <UpdateDialog
           title="Add New Actor"
           name="New Actor"
           head="Actor List"
-          openDialog={openDialog}
-          handleClose={this.handleClose}
+          open={this.state.addDialog}
+          handleClose={this.handleAddClose}
         />
         <UpdateDialog
           title="Update Actor"
           name="Update Actor"
           head="Actor List"
+          id={this.state.id}
+          actorname={this.state.name}
+          sex={this.state.sex}
+          bio={this.state.bio}
+          dob={this.state.dob}
           open={openDialog}
           handleClose={this.handleClose}
         />

@@ -23,6 +23,20 @@ exports.get_actor = function(req, res) {
     });
 };
 
+exports.update_actor = function(req, res) {
+    console.log(req.body._id);
+    Actor.findByIdAndUpdate({ _id: req.body._id }, { $set: req.body }, function(
+        err,
+        actorlist
+    ) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("done");
+        }
+    });
+};
+
 exports.delete_actor = function(req, res) {
     Actor.deleteOne({ _id: req.body.id }, function(err) {
         if (err) {

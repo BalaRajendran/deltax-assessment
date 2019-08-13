@@ -53,7 +53,7 @@ const styles = theme => ({
     maxHeight: "50%"
   }
 });
-class NewMovies extends React.Component {
+class UpdateMovies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,6 +69,16 @@ class NewMovies extends React.Component {
       bioerror: "",
       submitMessage: ""
     };
+  }
+  componentWillMount() {
+    var a = this.props.dob;
+    this.setState({
+      selectedDate: new Date(a.slice(0, 4), a.slice(8, 10) - 1, a.slice(5, 7)),
+      selectedValue: this.props.sex,
+      isLoading: false,
+      name: this.props.name,
+      bio: this.props.bio
+    });
   }
   handleChange = event => {
     this.setState({
@@ -130,6 +140,7 @@ class NewMovies extends React.Component {
       this.setState({ doberror: "Invalid Date" });
       k = 0;
     }
+
     if (!this.state.bio) {
       this.setState({ bioerror: "Enter Name" });
       k = 0;
@@ -144,25 +155,18 @@ class NewMovies extends React.Component {
         name: this.state.name,
         sex: this.state.selectedValue,
         dob: this.state.selectedDate,
-        bio: this.state.bio
+        bio: this.state.bio,
+        _id: this.props._id
       };
+      console.log(data);
       var self = this;
       axios
-        .post("/backend/newactor", data)
+        .post("/backend/updateactor", data)
         .then(function(res) {
           if ("done" == res.data) {
             self.setState({
               isLoading: false,
-              submitMessage: "Actors Added Successfully",
-              selectedDate: new Date(),
-              selectedValue: "Male",
-              name: "",
-              nameerror: "",
-              gender: "",
-              doberror: "",
-              gendererror: "",
-              bio: "",
-              bioerror: ""
+              submitMessage: "Actors Updated Successfully"
             });
           } else {
             self.setState({
@@ -332,7 +336,7 @@ class NewMovies extends React.Component {
                       className={classes.buttonProgress}
                     />
                   ) : (
-                    "Done"
+                    "Update"
                   )}
                 </Button>
               </Grid>
@@ -344,4 +348,4 @@ class NewMovies extends React.Component {
   }
 }
 
-export default withStyles(styles)(NewMovies);
+export default withStyles(styles)(UpdateMovies);

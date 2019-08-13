@@ -27,7 +27,41 @@ exports.movie_create = function(req, res) {
 };
 
 exports.get_movie = function(req, res) {
+    async function fetch(_id) {
+        let response = await Actor.find({ _id });
+        let data = await response;
+        return data;
+        // return "actorlist[0].name";
+    }
     Movie.find(function(err, movielist) {
+        var str = "";
+        for (var i = 0; i < movielist.length; i++) {
+            let costlist;
+            var query = { movieid: movielist[i]._id };
+            async function fetchdata() {
+                costlist = await Cost.find(query);
+                async function fetch(costlist) {
+                    var j = 0;
+                    while (costlist.length > j) {
+                        let response = await Actor.find({
+                            _id: costlist[j].actorid
+                        });
+                        let data = await response;
+                        str = str + data[0].name + ", ";
+                        j++;
+                        if (j == costlist.length) {
+                            // movielist[i].date = str;
+                            console.log(str);
+                            str = "";
+                        }
+                    }
+                }
+                // console.log(str);
+                fetch(costlist);
+                j++;
+            }
+            fetchdata();
+        }
         res.json(movielist);
     });
 };

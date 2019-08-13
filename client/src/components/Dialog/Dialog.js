@@ -33,10 +33,26 @@ class DialogComponent extends React.Component {
         tab = <NewMovies />;
         break;
       case "Update Movie":
-        tab = <UpdateMovies />;
+        tab = (
+          <UpdateMovies
+            _id={this.props.id}
+            poster={this.props.poster}
+            moviename={this.props.moviename}
+            year={this.props.year}
+            plot={this.props.plot}
+          />
+        );
         break;
       case "Update Actor":
-        tab = <UpdateActors />;
+        tab = (
+          <UpdateActors
+            _id={this.props.id}
+            name={this.props.actorname}
+            bio={this.props.bio}
+            sex={this.props.sex}
+            dob={this.props.dob}
+          />
+        );
         break;
       default:
         tab = <UpdateActors />;

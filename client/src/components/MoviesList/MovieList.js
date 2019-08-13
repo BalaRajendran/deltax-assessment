@@ -34,7 +34,12 @@ class MovieList extends Component {
       isLoading: true,
       openDialog: false,
       open: false,
-      Message: ""
+      Message: "",
+      id: "",
+      poster: "",
+      moviename: "",
+      year: "",
+      plot: ""
     };
   }
   componentWillMount() {
@@ -73,7 +78,14 @@ class MovieList extends Component {
                     color: "white"
                   }}
                   id={response.data[i]._id}
-                  onClick={this.handleEdit}
+                  onClick={this.handleEdit.bind(
+                    this,
+                    response.data[i]._id,
+                    response.data[i].poster,
+                    response.data[i].moviename,
+                    response.data[i].year.substring(0, 10),
+                    response.data[i].plot
+                  )}
                 >
                   <Edit />
                 </Button>
@@ -187,9 +199,14 @@ class MovieList extends Component {
       Message: ""
     });
   };
-  handleEdit = () => {
+  handleEdit = (id, poster, moviename, year, plot) => {
     this.setState({
-      openDialog: true
+      openDialog: true,
+      id,
+      poster,
+      moviename,
+      year,
+      plot
     });
   };
   render() {
@@ -218,17 +235,10 @@ class MovieList extends Component {
             </IconButton>
           ]}
         />
-        {/* <SelectComponent
-          title="Add New Movie"
-          name="Add movie"
-          head="Movie List"
-        /> */}
         <CommonDialogComponent
           title="Add New Movie"
           name="New Movie"
           head="Movie List"
-          // openDialog={openDialog}
-          // handleClose={this.handleClose}
         />
         <UpdateDialog
           title="Update Movie"
@@ -236,6 +246,11 @@ class MovieList extends Component {
           head="Movie List"
           open={openDialog}
           handleClose={this.handleClose}
+          id={this.state.id}
+          poster={this.state.poster}
+          moviename={this.state.moviename}
+          year={this.state.year}
+          plot={this.state.plot}
         />
         {this.state.isLoading && (
           <center>

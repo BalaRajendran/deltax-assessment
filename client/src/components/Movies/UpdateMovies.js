@@ -49,6 +49,7 @@ class NewMovies extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       openDialog: false,
       values: [],
       name: "",
@@ -224,6 +225,7 @@ class NewMovies extends React.Component {
     }
     if (k == 1) {
       const data = {
+        _id: this.state.id,
         name: this.state.name,
         year: this.state.yearOfReleasing,
         plot: this.state.plot,
