@@ -25,6 +25,7 @@ exports.movie_create = function(req, res) {
         }
     });
 };
+
 exports.get_movie = function(req, res) {
     async function getmovie() {
         let movielist = await Movie.find();
@@ -46,6 +47,22 @@ exports.get_movie = function(req, res) {
     getmovie();
 };
 
+exports.movie_update = function(req, res) {
+    async function update() {
+        const { name, year, plot, poster, cost, _id } = req.body;
+        let update = await Movie.findByIdAndUpdate({ _id }, { $set: { moviename: name, plot: plot, year: year, poster: poster } });
+        let costdelete = await Cost.deleteMany({ movieid: _id });
+        for (var i = 0; i < cost.length; i++) {
+            var movieCost = new Cost({
+                actorid: cost[i]._id,
+                movieid: _id
+            });
+            await movieCost.save();
+        }
+        res.send("done");
+    }
+    update();
+};
 exports.delete_movie = function(req, res) {
     Movie.deleteOne({ _id: req.body.id }, function(err) {
         if (err) {

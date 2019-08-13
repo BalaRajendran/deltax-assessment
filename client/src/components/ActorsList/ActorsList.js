@@ -171,7 +171,9 @@ class ActorList extends Component {
   };
   handleClose = () => {
     this.setState({
-      openDialog: false
+      openDialog: false,
+      open: true,
+      Message: "Updated Successfully"
     });
     this.handleFetch();
   };

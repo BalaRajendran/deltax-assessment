@@ -69,6 +69,9 @@ class NewMovies extends React.Component {
     };
   }
   componentWillMount() {
+    this.handleFetch();
+  }
+  handleFetch() {
     axios
       .get("backend/newactor")
       .then(response => {
@@ -90,6 +93,7 @@ class NewMovies extends React.Component {
       });
   }
   handleClose1 = () => {
+    this.handleFetch();
     this.setState({
       openDialog: false
     });
@@ -180,16 +184,16 @@ class NewMovies extends React.Component {
     e.preventDefault();
     let k = 1;
     this.setState({ isLoading: true });
-    if (this.state.image == null) {
-      this.setState({
-        posterError: "Poster is Required"
-      });
-      k = 0;
-    }
+
     if (
       this.state.posterError == "Poster Uploading, After Uploading Click Save"
     ) {
       this.setState({ submitMessage: "Wait few Seconds Image Uploading" });
+      k = 0;
+    } else if (!this.state.url) {
+      this.setState({
+        posterError: "Poster is Required"
+      });
       k = 0;
     }
     if (!this.state.name) {

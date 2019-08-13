@@ -85,9 +85,10 @@ class MovieList extends Component {
                     this,
                     response.data[i]._id,
                     response.data[i].poster,
-                    response.data[i].moviename,
+                    response.data[i].moviename.split("@")[0],
                     response.data[i].year.substring(0, 10),
-                    response.data[i].plot
+                    response.data[i].plot,
+                    response.data[i].moviename.split("@")[1]
                   )}
                 >
                   <Edit />
@@ -202,6 +203,7 @@ class MovieList extends Component {
     this.setState({
       openDialog: false
     });
+    this.handleFetch();
   };
   handleCloseSnack = () => {
     this.setState({
@@ -209,14 +211,15 @@ class MovieList extends Component {
       Message: ""
     });
   };
-  handleEdit = (id, poster, moviename, year, plot) => {
+  handleEdit = (id, poster, moviename, year, plot, cost) => {
     this.setState({
       openDialog: true,
       id,
       poster,
       moviename,
       year,
-      plot
+      plot,
+      cost
     });
   };
   handleOpen = () => {
@@ -226,7 +229,9 @@ class MovieList extends Component {
   };
   handleAddClose = () => {
     this.setState({
-      addDialog: false
+      addDialog: false,
+      open: true,
+      Message: "Updated Successfully"
     });
     this.handleFetch();
   };
@@ -277,6 +282,7 @@ class MovieList extends Component {
           id={this.state.id}
           poster={this.state.poster}
           moviename={this.state.moviename}
+          cost={this.state.cost}
           year={this.state.year}
           plot={this.state.plot}
         />

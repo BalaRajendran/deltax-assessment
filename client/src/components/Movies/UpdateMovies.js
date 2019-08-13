@@ -75,15 +75,25 @@ class NewMovies extends React.Component {
       .then(response => {
         let r = [];
         let l;
+        var cost = this.props.cost.split(", ");
         for (var i = 0; i < response.data.length; i++) {
           l = {
             _id: response.data[i]._id,
             name: response.data[i].name
           };
+          for (var j = 0; j < cost.length; j++) {
+            if (response.data[i].name == cost[j]) {
+              this.state.values.push(l);
+            }
+          }
           r.push(l);
         }
         this.setState({
-          actorlist: r
+          actorlist: r,
+          name: this.props.moviename,
+          yearOfReleasing: this.props.year,
+          plot: this.props.plot,
+          url: this.props.poster
         });
       })
       .catch(function(error) {
@@ -181,7 +191,7 @@ class NewMovies extends React.Component {
     e.preventDefault();
     let k = 1;
     this.setState({ isLoading: true });
-    if (this.state.image == null) {
+    if (this.state.url == "") {
       this.setState({
         posterError: "Poster is Required"
       });
@@ -225,7 +235,7 @@ class NewMovies extends React.Component {
     }
     if (k == 1) {
       const data = {
-        _id: this.state.id,
+        _id: this.props._id,
         name: this.state.name,
         year: this.state.yearOfReleasing,
         plot: this.state.plot,
@@ -234,7 +244,7 @@ class NewMovies extends React.Component {
       };
       var self = this;
       axios
-        .post("/backend/newmovie", data)
+        .post("/backend/updatemovie", data)
         .then(function(res) {
           if (res.data == "done") {
             self.setState({
@@ -251,7 +261,7 @@ class NewMovies extends React.Component {
               posterError: "",
               posterProgress: "",
               image: null,
-              submitMessage: "Movie Added Successfully",
+              submitMessage: "Movie Updated Successfully",
               posterLoading: ""
             });
           } else {
@@ -409,20 +419,30 @@ class NewMovies extends React.Component {
               >
                 {" "}
                 Select Poster
-                <input
-                  margin="normal"
-                  className={classes.textField}
-                  style={{
-                    marginLeft: " 6px",
-                    marginTop: "0.5rem",
-                    width: "100%"
-                  }}
-                  type="file"
-                  id="file"
-                  aria-label="File browser example"
-                  value={this.state.poster}
-                  onChange={this.handlePoster}
-                />
+                <div style={{ display: "flex" }}>
+                  <input
+                    margin="normal"
+                    className={classes.textField}
+                    style={{
+                      marginLeft: " 6px",
+                      marginTop: "0.5rem",
+                      width: "100%"
+                    }}
+                    type="file"
+                    id="file"
+                    aria-label="File browser example"
+                    value={this.state.poster}
+                    onChange={this.handlePoster}
+                  />
+                  {this.state.url && (
+                    <Grid container style={{ paddingBottom: "10px" }}>
+                      <img
+                        src={this.state.url}
+                        style={{ width: "100px", height: "100px" }}
+                      />
+                    </Grid>
+                  )}
+                </div>
                 {this.state.posterError && (
                   <Grid container style={{ paddingBottom: "10px" }}>
                     <Typography
@@ -501,7 +521,7 @@ class NewMovies extends React.Component {
                     className={classes.buttonProgress}
                   />
                 ) : (
-                  "Save"
+                  "Update"
                 )}
               </Button>
             </Grid>

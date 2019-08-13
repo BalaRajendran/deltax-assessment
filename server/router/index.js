@@ -9,6 +9,7 @@ router.post("/backend/deleteactor", NewActor_controller.delete_actor);
 
 router.post("/backend/newmovie", Movie_controller.movie_create);
 router.get("/backend/movielist", Movie_controller.get_movie);
+router.post("/backend/updatemovie", Movie_controller.movie_update);
 router.post("/backend/deletemovie", Movie_controller.delete_movie);
 
 module.exports = router;

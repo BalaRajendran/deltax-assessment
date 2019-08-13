@@ -40,6 +40,7 @@ class DialogComponent extends React.Component {
             moviename={this.props.moviename}
             year={this.props.year}
             plot={this.props.plot}
+            cost={this.props.cost}
           />
         );
         break;
