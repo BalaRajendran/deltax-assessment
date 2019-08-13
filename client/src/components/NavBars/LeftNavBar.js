@@ -6,6 +6,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Navigation from "./TopNavigation";
+import { HashLink as Link } from "react-router-hash-link";
 import LeftNav from "./LeftNavBar";
 import {
   Avatar,
@@ -25,10 +26,7 @@ import {
   Divider
 } from "@material-ui/core";
 class LeftNavBar extends React.Component {
-  handleButtonClick = (tabIndex, e) => {
-    this.props.switchTab(tabIndex);
-  };
-
+  handleButtonClick = () => {};
   render() {
     const { classes, proPic, selTab } = this.props;
     let isSelect = {
@@ -71,69 +69,64 @@ class LeftNavBar extends React.Component {
           <Divider />
 
           <div className={classes.listspace}>
-            <ListItem
-              className={classes.listtext}
-              button
-              onClick={this.handleButtonClick.bind(this, 1)}
+            <Link
+              to="/"
+              onClick={this.props.onClose}
+              style={{ color: "white" }}
             >
-              <img
-                className={classes.iconcolor}
-                alt="Help"
-                src={"/assets/images/help.png"}
-              />
-              <ListItemText primary="Home" />
-            </ListItem>
+              <ListItem
+                className={classes.listtext}
+                button
+                onClick={this.handleButtonClick}
+              >
+                <img
+                  className={classes.iconcolor}
+                  alt="Help"
+                  src={"/assets/images/help.png"}
+                />
+                <ListItemText primary="Movies" />
+              </ListItem>
+            </Link>
+            <Divider className={classes.divider} />
+            <Link
+              onClick={this.handleButtonClick}
+              to="/actorlist"
+              style={{ color: "white" }}
+            >
+              <ListItem
+                className={classes.listtext}
+                button
+                onClick={this.handleButtonClick}
+              >
+                <img
+                  className={classes.iconcolor}
+                  alt="Help"
+                  src={"/assets/images/help.png"}
+                />
+                <ListItemText primary="Actor List" />
+              </ListItem>
+            </Link>
             <Divider className={classes.divider} />
             <ListItem
               className={classes.listtext}
               button
-              onClick={this.handleButtonClick.bind(this, 5)}
+              onClick={this.handleButtonClick}
             >
               <img
                 className={classes.iconcolor}
                 alt="Help"
                 src={"/assets/images/help.png"}
               />
-              <ListItemText primary="About" />
+              <ListItemText primary="Tv Shows" />
             </ListItem>
             <Divider className={classes.divider} />
-            <ListItem
-              className={classes.listtext}
-              button
-              onClick={this.handleButtonClick.bind(this, 7)}
-            >
+            <ListItem className={classes.listtext} button to="">
               <img
                 className={classes.iconcolor}
                 alt="Help"
                 src={"/assets/images/help.png"}
               />
-              <ListItemText primary="Treatment" />
-            </ListItem>
-            <Divider className={classes.divider} />
-            <ListItem
-              className={classes.listtext}
-              button
-              onClick={this.handleButtonClick.bind(this, 6)}
-            >
-              <img
-                className={classes.iconcolor}
-                alt="Help"
-                src={"/assets/images/help.png"}
-              />
-              <ListItemText primary="Faq" />
-            </ListItem>
-            <Divider className={classes.divider} />
-            <ListItem
-              className={classes.listtext}
-              button
-              onClick={this.handleButtonClick.bind(this, 3)}
-            >
-              <img
-                className={classes.iconcolor}
-                alt="Help"
-                src={"/assets/images/help.png"}
-              />
-              <ListItemText primary="Contact" />
+              <ListItemText primary="Celebrities" />
             </ListItem>
             <Divider className={classes.divider} />
           </div>

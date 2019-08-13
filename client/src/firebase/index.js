@@ -10,6 +10,5 @@ var firebaseConfig = {
   appId: "1:263885238756:web:bd6fd876fce415d6"
 };
 firebase.initializeApp(firebaseConfig);
-console.log(firebaseConfig);
 const storage = firebase.storage();
 export { storage, firebase as default };

@@ -96,7 +96,7 @@ class TopNavBar extends React.Component {
               onClose={this.toggleDrawer("left", false)}
               onOpen={this.toggleDrawer("left", true)}
             >
-              <LeftNav />
+              <LeftNav onClose={this.toggleDrawer("left", false)} />
               {/* <div className={classes.list}>
                 <List>
                   <ListItem className={classes.listtext} button>

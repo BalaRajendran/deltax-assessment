@@ -22,7 +22,12 @@ class DialogTitle extends React.Component {
   };
   render() {
     return (
-      <div>
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="flex-start"
+      >
         <Typography
           variant="h6"
           style={{ display: "inline", marginLeft: "20px" }}
@@ -32,7 +37,7 @@ class DialogTitle extends React.Component {
         <Button
           variant="contained"
           style={{
-            left: "80%",
+            // left: "80%",
             backgroundColor: "#00c851",
             color: "white"
           }}
@@ -40,7 +45,7 @@ class DialogTitle extends React.Component {
         >
           <Add /> Add New Movie
         </Button>
-      </div>
+      </Grid>
     );
   }
 }
