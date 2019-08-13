@@ -199,7 +199,7 @@ class NewMovies extends React.Component {
     if (!this.state.name) {
       this.setState({ nameerror: "Enter Movie Name" });
       k = 0;
-    } else if (!/^[a-zA-Z. ]{2,30}$/.test(this.state.name)) {
+    } else if (!/^[a-zA-Z. ]{2,50}$/.test(this.state.name)) {
       this.setState({
         nameerror: "Invalid Movie Name"
       });
@@ -214,7 +214,7 @@ class NewMovies extends React.Component {
     if (!this.state.plot) {
       this.setState({ plotError: "Enter Plot Name" });
       k = 0;
-    } else if (!/^[a-zA-Z.,-=> ]{2,100}$/.test(this.state.plot)) {
+    } else if (!/^[a-zA-Z.,-=> ]{2,500}$/.test(this.state.plot)) {
       this.setState({
         plotError: "Invalid Plot Name"
       });

@@ -221,7 +221,7 @@ class NewMovies extends React.Component {
     if (!this.state.plot) {
       this.setState({ plotError: "Enter Plot Name" });
       k = 0;
-    } else if (!/^[a-zA-Z.,-=> ]{2,100}$/.test(this.state.plot)) {
+    } else if (!/^[a-zA-Z.,-=> ]{2,500}$/.test(this.state.plot)) {
       this.setState({
         plotError: "Invalid Plot Name"
       });

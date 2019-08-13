@@ -120,7 +120,7 @@ class NewMovies extends React.Component {
     if (!this.state.name) {
       this.setState({ nameerror: "Enter Name" });
       k = 0;
-    } else if (!/^[a-zA-Z. ]{2,30}$/.test(this.state.name)) {
+    } else if (!/^[a-zA-Z. ]{2,60}$/.test(this.state.name)) {
       this.setState({
         nameerror: "Invalid Actor Name"
       });
