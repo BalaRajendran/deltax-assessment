@@ -279,7 +279,7 @@ class NewMovies extends React.Component {
               poster: "",
               posterError: "",
               image: null,
-              submitMessage: "Something Went Wrong, Try Again Later",
+              submitMessage: res.data,
               posterLoading: ""
             });
           }

@@ -167,7 +167,7 @@ class NewMovies extends React.Component {
           } else {
             self.setState({
               isLoading: false,
-              submitMessage: "Something Went Wrong",
+              submitMessage: res.data,
               selectedDate: new Date(),
               selectedValue: "Male",
               name: "",
