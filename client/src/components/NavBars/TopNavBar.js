@@ -56,13 +56,15 @@ class TopNavBar extends React.Component {
         <div className={classes.root}>
           <AppBar>
             <Toolbar onClick={this.toggleDrawer("left", true)}>
-              <IconButton
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="Open drawer"
-              >
-                <MenuIcon />
-              </IconButton>
+              <Hidden only={["lg", "md", "xl"]}>
+                <IconButton
+                  className={classes.menuButton}
+                  color="inherit"
+                  aria-label="Open drawer"
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Hidden>
               <Typography
                 className={classes.title}
                 style={{ color: "#fff" }}
@@ -97,83 +99,6 @@ class TopNavBar extends React.Component {
               onOpen={this.toggleDrawer("left", true)}
             >
               <LeftNav onClose={this.toggleDrawer("left", false)} />
-              {/* <div className={classes.list}>
-                <List>
-                  <ListItem className={classes.listtext} button>
-                    <ListItemIcon />
-                    <ListItemText primary={"Admin"} />
-                  </ListItem>
-                  <Divider />
-
-                  <div className={classes.listspace}>
-                    <ListItem
-                      className={classes.listtext}
-                      button
-                      onClick={this.handleButtonClick.bind(this, 1)}
-                    >
-                      <img
-                        className={classes.iconcolor}
-                        alt="Help"
-                        src={"/assets/images/help.png"}
-                      />
-                      <ListItemText primary="Home" />
-                    </ListItem>
-                    <Divider className={classes.divider} />
-                    <ListItem
-                      className={classes.listtext}
-                      button
-                      onClick={this.handleButtonClick.bind(this, 5)}
-                    >
-                      <img
-                        className={classes.iconcolor}
-                        alt="Help"
-                        src={"/assets/images/help.png"}
-                      />
-                      <ListItemText primary="About" />
-                    </ListItem>
-                    <Divider className={classes.divider} />
-                    <ListItem
-                      className={classes.listtext}
-                      button
-                      onClick={this.handleButtonClick.bind(this, 7)}
-                    >
-                      <img
-                        className={classes.iconcolor}
-                        alt="Help"
-                        src={"/assets/images/help.png"}
-                      />
-                      <ListItemText primary="Treatment" />
-                    </ListItem>
-                    <Divider className={classes.divider} />
-                    <ListItem
-                      className={classes.listtext}
-                      button
-                      onClick={this.handleButtonClick.bind(this, 6)}
-                    >
-                      <img
-                        className={classes.iconcolor}
-                        alt="Help"
-                        src={"/assets/images/help.png"}
-                      />
-                      <ListItemText primary="Faq" />
-                    </ListItem>
-                    <Divider className={classes.divider} />
-                    <ListItem
-                      className={classes.listtext}
-                      button
-                      onClick={this.handleButtonClick.bind(this, 3)}
-                    >
-                      <img
-                        className={classes.iconcolor}
-                        alt="Help"
-                        src={"/assets/images/help.png"}
-                      />
-                      <ListItemText primary="Contact" />
-                    </ListItem>
-                    <Divider className={classes.divider} />
-                  </div>
-                </List>
-              </div> */}
             </SwipeableDrawer>
           </Hidden>
         </div>
