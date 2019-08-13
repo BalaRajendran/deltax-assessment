@@ -104,17 +104,18 @@ class ActorList extends Component {
               width: 150
             },
             {
+              label: "Date Of Birth",
+              field: "dob",
+              sort: "asc",
+              width: 500
+            },
+            {
               label: "Sex",
               field: "sex",
               sort: "asc",
               width: 270
             },
-            {
-              label: "Date Of Birth",
-              field: "dob",
-              sort: "asc",
-              width: 200
-            },
+
             {
               label: "Bio",
               field: "bio",
@@ -239,10 +240,6 @@ class ActorList extends Component {
           open={this.state.addDialog}
           handleClose={this.handleAddClose}
         />
-        {/* <p>
-          sss
-          <i class="fa fa-sort float-right" aria-hidden="true" />
-        </p> */}
         <UpdateDialog
           title="Update Actor"
           name="Update Actor"
@@ -266,7 +263,7 @@ class ActorList extends Component {
           responsive
           searchLabel="Search for Actors"
           entriesLabel="Show entries"
-          entries={20}
+          entries={10}
           entriesOptions={[5, 10, 15]}
           striped
           bordered

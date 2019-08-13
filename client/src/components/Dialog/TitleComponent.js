@@ -43,7 +43,7 @@ class DialogTitle extends React.Component {
           }}
           onClick={this.props.handleOpen}
         >
-          <Add /> Add New Movie
+          <Add /> {this.props.head}
         </Button>
       </Grid>
     );
