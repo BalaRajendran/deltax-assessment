@@ -64,9 +64,10 @@ class ActorList extends Component {
                 >
                   <Edit />
                 </Button>
-                <Button
+                {/* <Button
                   variant="contained"
                   className="delete"
+                  disabled
                   style={{
                     backgroundColor: "#c9302c",
                     borderColor: "#ac2925",
@@ -75,7 +76,7 @@ class ActorList extends Component {
                   onClick={this.handleDelete.bind(this, response.data[i]._id)}
                 >
                   <Delete />
-                </Button>
+                </Button> */}
               </div>
             )
           };
