@@ -261,6 +261,7 @@ class NewMovies extends React.Component {
               posterError: "",
               posterProgress: "",
               image: null,
+              url: "",
               submitMessage: "Movie Updated Successfully",
               posterLoading: ""
             });

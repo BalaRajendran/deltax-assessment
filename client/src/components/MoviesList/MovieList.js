@@ -201,8 +201,11 @@ class MovieList extends Component {
   }
   handleClose = () => {
     this.setState({
-      openDialog: false
+      openDialog: false,
+      open: true,
+      Message: "Updated Successfully"
     });
+
     this.handleFetch();
   };
   handleCloseSnack = () => {
@@ -229,9 +232,7 @@ class MovieList extends Component {
   };
   handleAddClose = () => {
     this.setState({
-      addDialog: false,
-      open: true,
-      Message: "Updated Successfully"
+      addDialog: false
     });
     this.handleFetch();
   };
