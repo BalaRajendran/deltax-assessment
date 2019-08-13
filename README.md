@@ -1,7 +1,11 @@
 # Deltax-assessment
 
+Deployed Link
+<a target="_blank" href="https://deltax-assessment.herokuapp.com">https://deltax-assessment.herokuapp.com</a>
+
 To Run this project
-For this Assessment I'm using MERN stack and frontend is designed with Material UI
+For this Assessment I'm using MERN stack and frontend is designed with Material UI. And my File struture In my client folder all the front end codes are there and in the root folder server code is placed.
+
 **<h2>First Install node_modules</h2>**
 
 **In the root folder**<br>
