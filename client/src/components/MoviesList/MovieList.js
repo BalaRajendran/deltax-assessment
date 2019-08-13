@@ -11,7 +11,7 @@ import Delete from "@material-ui/icons/Delete";
 import LazyLoad from "react-lazy-load";
 import axios from "axios";
 import Edit from "@material-ui/icons/Edit";
-import SelectComponent from "./../Dialog/DialogTitle";
+import SelectComponent from "../Dialog/TitleComponent";
 import {
   MDBBtn,
   MDBTable,
@@ -25,7 +25,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import green from "@material-ui/core/colors";
 import UpdateDialog from "./../Dialog/Dialog";
-import CommonDialogComponent from "./../Dialog/DialogTitle";
+import DialogComponent from "../Dialog/TitleComponent";
 class MovieList extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +39,8 @@ class MovieList extends Component {
       poster: "",
       moviename: "",
       year: "",
-      plot: ""
+      plot: "",
+      addDialog: false
     };
   }
   componentWillMount() {
@@ -52,10 +53,12 @@ class MovieList extends Component {
         let l;
         let r = [];
         for (var i = 0; i < response.data.length; i++) {
+          var splitname = response.data[i].moviename.split("@");
           l = {
-            moviename: response.data[i].moviename,
+            moviename: splitname[0],
             year: response.data[i].year.substring(0, 10),
             plot: response.data[i].plot,
+            cost: splitname[1],
             poster: (
               <LazyLoad
                 width={100}
@@ -117,6 +120,7 @@ class MovieList extends Component {
             moviename: item.moviename,
             year: item.year,
             plot: item.plot,
+            cost: item.cost,
             edit: item.edit
           });
         }
@@ -143,6 +147,12 @@ class MovieList extends Component {
             {
               label: "Plot",
               field: "plot",
+              sort: "asc",
+              width: 100
+            },
+            {
+              label: "Cost",
+              field: "cost",
               sort: "asc",
               width: 100
             },
@@ -209,6 +219,17 @@ class MovieList extends Component {
       plot
     });
   };
+  handleOpen = () => {
+    this.setState({
+      addDialog: true
+    });
+  };
+  handleAddClose = () => {
+    this.setState({
+      addDialog: false
+    });
+    this.handleFetch();
+  };
   render() {
     const { openDialog } = this.state;
     return (
@@ -235,10 +256,17 @@ class MovieList extends Component {
             </IconButton>
           ]}
         />
-        <CommonDialogComponent
+        <DialogComponent
+          head="Movie List"
+          open={this.state.addDialog}
+          handleOpen={this.handleOpen}
+        />
+        <UpdateDialog
           title="Add New Movie"
           name="New Movie"
           head="Movie List"
+          open={this.state.addDialog}
+          handleClose={this.handleAddClose}
         />
         <UpdateDialog
           title="Update Movie"

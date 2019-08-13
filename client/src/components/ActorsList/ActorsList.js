@@ -12,7 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import green from "@material-ui/core/colors";
 import UpdateDialog from "./../Dialog/Dialog";
-import CommonDialogComponent from "./../Dialog/DialogTitle";
+import DialogComponent from "../Dialog/TitleComponent";
 class ActorList extends Component {
   constructor(props) {
     super(props);
@@ -224,25 +224,11 @@ class ActorList extends Component {
             ]}
           />
         )}
-        <div>
-          <Typography
-            variant="h6"
-            style={{ display: "inline", marginLeft: "20px" }}
-          >
-            {this.state.head}
-          </Typography>
-          <Button
-            variant="contained"
-            style={{
-              left: "80%",
-              backgroundColor: "#00c851",
-              color: "white"
-            }}
-            onClick={this.handleOpen}
-          >
-            <Add /> Add New Actor
-          </Button>
-        </div>
+        <DialogComponent
+          head="Actor List"
+          open={this.state.addDialog}
+          handleOpen={this.handleOpen}
+        />
         <UpdateDialog
           title="Add New Actor"
           name="New Actor"

@@ -7,7 +7,7 @@ import {
   DialogActions
 } from "@material-ui/core";
 import { withStyles, Grid } from "@material-ui/core";
-import DialogHead from "./../Dialog/DialogTitle";
+import DialogHead from "./TitleComponent";
 import NewActors from "./../Actor/NewActors";
 import NewMovies from "./../Movies/NewMovies";
 import UpdateActors from "./../Actor/UpdateActors";

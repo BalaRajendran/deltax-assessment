@@ -296,9 +296,10 @@ class NewMovies extends React.Component {
           title="Add New Actor"
           name="New Actor"
           head="Actor List"
-          openDialog={this.state.openDialog}
+          open={this.state.openDialog}
           handleClose={this.handleClose1}
         />
+
         <Button
           variant="contained"
           style={{
